@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Lib.Tools.Json;
 
-public class AbstractConverter<TInterface, TImplementation> : JsonConverter<TInterface> where TImplementation : TInterface
+public class AbstractConverter<TInterface, TImplementation> : JsonConverter<TInterface> where TImplementation : TInterface where TInterface : notnull
 {
     public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(TInterface);
 
@@ -15,5 +15,5 @@ public class AbstractConverter<TInterface, TImplementation> : JsonConverter<TInt
         JsonSerializer.Deserialize<TImplementation>(ref reader, options);
 
     public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options) => 
-        JsonSerializer.Serialize(writer, value);
+        JsonSerializer.Serialize(writer, (TImplementation) value);
 }
