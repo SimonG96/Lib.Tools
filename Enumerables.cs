@@ -11,7 +11,8 @@ public static class Enumerables
 {
     public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable) => new(enumerable);
     public static ObservableCollection<T> ToObservableCollectionOfType<T>(this IEnumerable enumerable) => enumerable.Cast<T>().ToObservableCollection();
-        
+    public static IEnumerable<T> NotOfType<T, TExcludedType>(this IEnumerable<T> enumerable) => enumerable.Where(i => i is not TExcludedType);
+    
     public static IEnumerable<T> ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
     {
         IEnumerable<T> list = enumerable.ToList();
