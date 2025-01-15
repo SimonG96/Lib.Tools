@@ -34,18 +34,21 @@ public static class Enumerables
     public static IEnumerable<T> Maintain<T>(this IList<T> enumerable, IEnumerable<T> updatedEnumerable) where T : notnull
     {
         List<T> maintainingEnumerable = updatedEnumerable.ToList();
-        
-        bool needsMaintaining = enumerable.Count != maintainingEnumerable.Count;
-        if (!needsMaintaining) 
-            needsMaintaining = enumerable.Where((item, i) => !item.Equals(maintainingEnumerable[i])).Any();
-
-        if (!needsMaintaining)
-            return enumerable;
-
-        foreach (T item in maintainingEnumerable.Where(i => !enumerable.Contains(i))) 
-            enumerable.Insert(maintainingEnumerable.IndexOf(item), item);
 
         enumerable.RemoveAll(i => !maintainingEnumerable.Contains(i));
+
+        for (int i = 0; i < maintainingEnumerable.Count; i++)
+        {
+            if (i < enumerable.Count)
+            {
+                if (enumerable[i].Equals(maintainingEnumerable[i]))
+                    continue;
+
+                enumerable[i] = maintainingEnumerable[i];
+            }
+            else
+                enumerable.Add(maintainingEnumerable[i]);
+        }
 
         return enumerable;
     }
