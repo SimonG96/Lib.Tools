@@ -10,7 +10,7 @@ public class AsyncLock
 
     public async Task<Lock> Lock()
     {
-        await _semaphoreSlim.WaitAsync();
+        await _semaphoreSlim.WaitAsync().ConfigureAwait(false);
         return new Lock(_semaphoreSlim);
     }
 }
