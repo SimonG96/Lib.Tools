@@ -26,7 +26,7 @@ public static class Enumerables
     {
         IEnumerable<T> list = enumerable.ToList();
         foreach (T item in list) 
-            await function(item);
+            await function(item).ConfigureAwait(false);
 
         return list;
     }

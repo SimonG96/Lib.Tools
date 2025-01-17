@@ -18,18 +18,18 @@ public class JsonFileHandler<TInterface, TImplementation> where TImplementation 
     public async Task WriteFile(TInterface value, string filePath)
     {
         await using FileStream fileStream = File.OpenWrite(filePath);
-        await JsonSerializer.SerializeAsync(fileStream, value, _jsonSerializerOptions);
+        await JsonSerializer.SerializeAsync(fileStream, value, _jsonSerializerOptions).ConfigureAwait(false);
     }
 
     public async Task WriteToExistingFile(TInterface value, string filePath)
     {
         await using FileStream fileStream = File.Open(filePath, FileMode.Truncate, FileAccess.Write);
-        await JsonSerializer.SerializeAsync(fileStream, value, _jsonSerializerOptions);
+        await JsonSerializer.SerializeAsync(fileStream, value, _jsonSerializerOptions).ConfigureAwait(false);
     }
 
     public async Task<TInterface> ReadFile(string filePath)
     {
         await using FileStream fileStream = File.OpenRead(filePath);
-        return await JsonSerializer.DeserializeAsync<TInterface>(fileStream, _jsonSerializerOptions) ?? throw new Exception($"Invalid {typeof(TInterface)} file.");
+        return await JsonSerializer.DeserializeAsync<TInterface>(fileStream, _jsonSerializerOptions).ConfigureAwait(false) ?? throw new Exception($"Invalid {typeof(TInterface)} file.");
     }
 }
