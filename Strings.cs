@@ -27,4 +27,6 @@ public static partial class Strings
         while (await stringReader.ReadLineAsync(cancellationToken).ConfigureAwait(false) is { } line)
             yield return line;
     }
+
+    public static bool IsNumber(this string input) => double.TryParse(input, out _);
 }
