@@ -13,7 +13,6 @@ public static partial class Strings
     private static partial Regex WhitespaceRegex();
     
     public static string RemoveWhitespaces(this string input) => WhitespaceRegex().Replace(input, "");
-
     public static IEnumerable<string> ReadLines(this string input)
     {
         using StringReader stringReader = new(input);
@@ -29,4 +28,5 @@ public static partial class Strings
     }
 
     public static bool IsNumber(this string input) => double.TryParse(input, out _);
+    public static IEnumerable<string> TrimAll(this IEnumerable<string> input, params char[] characters) => input.Select(i => i.Trim(characters));
 }
