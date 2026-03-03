@@ -60,4 +60,6 @@ public static class Enumerables
 
         return enumerable;
     }
+
+    public static bool ContainsAny<T>(this IEnumerable<T> enumerable, IEnumerable<T> of) => enumerable.Intersect(of).Any();
 }
