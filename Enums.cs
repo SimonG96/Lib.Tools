@@ -10,4 +10,7 @@ public static class Enums
 {
     public static TAttribute GetAttribute<TAttribute, TEnum>(this TEnum @enum) where TAttribute : Attribute where TEnum : Enum => 
         @enum.GetType().GetField(Enum.GetName(typeof(TEnum), @enum) ?? "")?.GetCustomAttribute<TAttribute>() ?? throw new Exception($"Can't find attribute {@enum}.");
+    
+    public static TAttribute GetAttribute<TAttribute>(this Enum @enum) where TAttribute : Attribute => 
+        @enum.GetType().GetField(Enum.GetName(@enum.GetType(), @enum) ?? "")?.GetCustomAttribute<TAttribute>() ?? throw new Exception($"Can't find attribute {@enum}.");
 }
