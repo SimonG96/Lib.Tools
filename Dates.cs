@@ -8,11 +8,16 @@ namespace Lib.Tools;
 
 public static class Dates
 {
-    public static bool IsInSameWeek(this DateTime date, DateTime referenceDate)
+    public static int GetWeekOfYear(this DateTime date, CalendarWeekRule rule = CalendarWeekRule.FirstDay, DayOfWeek firstDayOfWeek = DayOfWeek.Monday)
     {
         Calendar currentCalendar = CultureInfo.CurrentCulture.Calendar;
-        int referenceWeek = currentCalendar.GetWeekOfYear(referenceDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-        int currentWeek = currentCalendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+        return currentCalendar.GetWeekOfYear(date, rule, firstDayOfWeek);
+    }
+    
+    public static bool IsInSameWeek(this DateTime date, DateTime referenceDate)
+    {
+        int referenceWeek = referenceDate.GetWeekOfYear();
+        int currentWeek = date.GetWeekOfYear();
 
         return referenceWeek == currentWeek;
     }
