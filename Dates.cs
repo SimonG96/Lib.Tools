@@ -31,7 +31,7 @@ public static class Dates
         if (dayOfWeek == -1) //Sunday is -1
             dayOfWeek = 6; //Start week on Monday
 
-        List<DateTime> dates = new();
+        List<DateTime> dates = [];
         for (int i = 0; i < 7; i++)
         {
             DateTime day = date.AddDays(i).Subtract(new TimeSpan(dayOfWeek, 0, 0, 0));
