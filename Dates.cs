@@ -40,4 +40,6 @@ public static class Dates
 
         return dates;
     }
+    
+    public static DateOnly ToDateOnly(this DateTime dateTime) => DateOnly.FromDateTime(dateTime);
 }
