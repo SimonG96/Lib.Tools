@@ -42,4 +42,9 @@ public static class Dates
     }
     
     public static DateOnly ToDateOnly(this DateTime dateTime) => DateOnly.FromDateTime(dateTime);
+    public static DateTime GetPreviousMonth(this DateTime currentMonth) => currentMonth.Month - 1 > 0 ? 
+        new DateTime(currentMonth.Year, currentMonth.Month - 1, 1) : new DateTime(currentMonth.Year - 1, 12, 1);
+
+    public static DateTime GetNextMonth(this DateTime currentMonth) => currentMonth.Month + 1 <= 12 ?
+        new DateTime(currentMonth.Year, currentMonth.Month + 1, 1) : new DateTime(currentMonth.Year + 1, 1, 1);
 }
