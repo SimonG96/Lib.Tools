@@ -23,6 +23,7 @@ public static class Dates
     }
 
     public static bool EqualsDay(this DateTime to, DateTime compare) => to.Year == compare.Year && to.Month == compare.Month && to.Day == compare.Day;
+    public static bool EqualsDay(this DateOnly to, DateOnly compare) => to.Year == compare.Year && to.Month == compare.Month && to.Day == compare.Day;
     public static bool IsToday(this DateTime date) => DateTime.Today.EqualsDay(date);
 
     public static List<DateTime> GetDatesOfWeek(this DateTime date)
