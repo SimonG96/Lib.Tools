@@ -50,4 +50,7 @@ public static class Dates
 
     public static DateTime GetNextMonth(this DateTime currentMonth) => currentMonth.Month + 1 <= 12 ?
         new DateTime(currentMonth.Year, currentMonth.Month + 1, 1) : new DateTime(currentMonth.Year + 1, 1, 1);
+    
+    public static DateTime Min(DateTime compare, DateTime to) => compare < to ? compare : to;
+    public static DateTime Max(DateTime compare, DateTime to) => compare > to ? compare : to;
 }
